@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //db routes
 const db = require("./models");
+
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
@@ -24,6 +25,7 @@ db.sequelize.sync({ force: true }).then(() => {
 app.get("/", (req, res) => {
   res.json({ message: "Test server. Hello!." });
 });
+require("./routes/productos.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     nombre: {
       type: Sequelize.STRING,
     },
-    description: {
+    descripcion: {
       type: Sequelize.STRING,
     },
     habilitado: {
