@@ -164,7 +164,7 @@ npm run start
 
 - Método
 
-  POST
+  `POST`
 
 - Parámetros de la url
 
@@ -269,12 +269,6 @@ Obligatorios:
   **Contenido**: `{ message: "Se edito el Producto satisfactoriamente."}`
 
 - Respuesta de Error
-
-  **Codigo**: 500
-  
-  **Contenido**: `{ message: "Se edito el Producto satisfactoriamente." }`
-
-  O
 
   **Codigo**: 500
   
