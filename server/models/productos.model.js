@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.BOOLEAN,
     },
     imagen: {
-      type: Sequelize.STRING,
+      type: Sequelize.BLOB,
     },
   });
 
