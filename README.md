@@ -72,7 +72,9 @@ npm run start
   ```
 
 - Respuesta de Error
+
   **Codigo**: 500
+  
   **Contenido**: `{ message: err.message || "Ocurrio un error al obtener los Productos" }`
 
 - Ejemplo
@@ -114,7 +116,9 @@ npm run start
   `id=[integer]`
 
 - Respuesta de Exito
+
   **Codigo**: 200
+  
   **Contenido**:
 
   ```
@@ -130,23 +134,26 @@ npm run start
   ```
 
 - Respuesta de Error
+
   **Codigo**: 500
+  
   **Contenido**: `{ message: "Ocurrio un error al obtener el Producto. Quizas no existe" }`
 
   o
 
   **Codigo**: 500
+  
   **Contenido**: `{ message: "Ocurrio un error al obtener Producto con id=" + id }`
 
 - Ejemplo
   ```
   axios.get('/api/productos/1')
-  .then((response) => {
-  	console.log(response.data)
-  })
-  .catch((error) => {
-  	console.log(error)
-  })
+  	.then((response) => {
+  		console.log(response.data)
+  	})
+  	.catch((error) => {
+  		console.log(error)
+  	})
   ```
 
 ## Crear
@@ -176,7 +183,9 @@ npm run start
   ```
 
 - Respuesta de Éxito:
+
   **Codigo**: 200
+  
   **Contenido**:
 
   ```
@@ -196,12 +205,15 @@ npm run start
   ```
 
 - Respuesta de Error
+
   **Codigo**: 500
+  
   Contenido: `{ message: err.message || "Ocurrio un error al crear el producto."}`
 
   O
 
   **Codigo**: 400
+  
   Contenido: `{ message: "El nombre no puede estar vacio"}`
 
 - Ejemplo
@@ -251,22 +263,28 @@ Obligatorios:
 ```
 
 - Respuesta de Exito
+
   **Codigo**: 200
+  
   **Contenido**: `{ message: "Se edito el Producto satisfactoriamente."}`
 
 - Respuesta de Error
+
   **Codigo**: 500
-  **Contenido**:message: "Se edito el Producto satisfactoriamente."
+  
+  **Contenido**: `{ message: "Se edito el Producto satisfactoriamente." }`
 
-      O
+  O
 
-      **Codigo**: 500
-      **Contenido**: `{ message:  No se puede editar el Producto con id=${id}. Quizas el Producto no existe o el cuerpo de la solicitud esta vacio. }`
+  **Codigo**: 500
+  
+  **Contenido**: `{ message:  No se puede editar el Producto con id=${id}. Quizas el Producto no existe o el cuerpo de la solicitud esta vacio. }`
 
-      O
+  O
 
-      **Codigo**: 500
-      **Contenido**: `{ message:  "Ocurrio un error editando el Producto con id=" + id }`
+  **Codigo**: 500
+  
+  **Contenido**: `{ message:  "Ocurrio un error editando el Producto con id=" + id }`
 
 - Ejemplo
 
@@ -307,16 +325,21 @@ Obligatorios:
 id=[integer]
 
 - Respuesta de Exito
+
   **Código**: 200
+  
   **Contenido**: `{ message: "El producto fue eliminado satisfactoriamente!."}`
 
 - Respuesta de Error
+
   **Código**: 500
+  
   **Contenido**: `{ message: No se puede eliminar el producto con id=${id}. Tal vez el producto no fue encontrado. }`
 
   O
 
   **Código**: 500
+  
   **Contenido**: `{ No se pudo eliminar el producto con el id=" + id }`
 
 - Ejemplo
