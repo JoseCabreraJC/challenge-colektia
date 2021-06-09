@@ -6,7 +6,7 @@
 npm install
 ```
 
-### Configurar las variables de entorno que permitan conectar a la base de datos
+### Configurar las variables de entorno en un .env ubicado en el root del proyecto
 
 | Tenga en cuenta que el server de Vue envia la solicitudes al localhost y al puerto 8080
 
@@ -45,32 +45,56 @@ npm run start
   `nombre=[string]`
 
 - Respuesta de Exito
+
   **Codigo**: 200
+  
   **Contenido**:
-  `{data: [ {id:0, nombre:"remera", descripcion: "Remera talle XL", habilitado: true, imagen:null}, {id:1 ,nombre:"pantalon", descripcion:"Pantalon bordado gris", habilitado: false, imagen:'pantalon.jpg'} ]}`
+  
+  ```
+  { data: 
+  	[ 
+		{
+			id:0, 
+			nombre:"remera", 
+			descripcion: "Remera talle XL", 
+			habilitado: true, 
+			imagen:null
+		}, 
+		{
+			id: 1,
+			nombre:"pantalon", 
+			descripcion:"Pantalon bordado gris", 
+			habilitado: false, 
+			imagen:'pantalon.jpg'
+		} 
+	]
+	}
+  ```
 
 - Respuesta de Error
   **Codigo**: 500
-  Contenido: `{ message: err.message || "Ocurrio un error al obtener los Productos" }`
+  **Contenido**: `{ message: err.message || "Ocurrio un error al obtener los Productos" }`
 
 - Ejemplo
   ```
   axios.get('/api/productos/')
-  	.then((response) => {
-  console.log(response.data)
-  })
-  .catch((error) => {
-  	console.log(error)
-  })
+  	.then((response) =>
+	{
+  		console.log(response.data)
+  	})
+  	.catch((error) => {
+  		console.log(error)
+  	})
   ```
   ```
   axios.get('/api/productos/?nombre=remera')
-  .then((response) => {
-  	console.log(response.data)
-  })
-  .catch((error) => {
-  	console.log(error)
-  })
+  	.then((response) =>
+	{
+  		console.log(response.data)
+	})
+  	.catch((error) => {
+  		console.log(error)
+  	})
   ```
 
 ## Obtener un producto por su id
