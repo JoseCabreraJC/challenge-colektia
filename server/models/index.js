@@ -25,13 +25,4 @@ db.sequelize = sequelize;
 
 db.producto = require("./productos.model")(sequelize, Sequelize);
 
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("conexion correcta");
-  } catch (error) {
-    console.error();
-  }
-})();
-
 module.exports = db;

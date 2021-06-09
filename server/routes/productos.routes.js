@@ -4,25 +4,19 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Crear un nuevo Producto
-  router.post("/", productos.agregar);
+  router.post("/", productos.addProduct);
 
-  // Trae todos los productos
-  router.get("/", productos.buscarTodos);
-
-  // Trae todos los productos habilitados
-  router.get("/habilitados", productos.encontrarHabilitados);
+  // Trae todos los productos o filtra por nombre si se recibe ese parametro
+  router.get("/", productos.getAll);
 
   // Devuelve un producot por su id
-  router.get("/:id", productos.buscarUnoPorId);
+  router.get("/:id", productos.getAllById);
 
-  // Actualiza un Tutorial por su id
-  router.put("/:id", productos.actualizar);
+  // Actualiza un producto por su id
+  router.put("/:id", productos.updateOne);
 
-  // Borra un tutorial por su id
-  router.delete("/:id", productos.borrar);
-
-  // Borra todos los productos
-  // router.delete("/", productos.borrarTodos);
+  // Borra un producto por su id
+  router.delete("/:id", productos.deleteOne);
 
   app.use("/api/productos", router);
 };

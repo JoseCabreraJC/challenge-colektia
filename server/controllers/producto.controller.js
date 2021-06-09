@@ -3,7 +3,7 @@ const Producto = db.producto;
 const Op = db.Sequelize.Op;
 
 // Crear y guardar un nuevo new Producto
-exports.agregar = (req, res) => {
+exports.addProduct = (req, res) => {
   if (!req.body.nombre) {
     res.status(400).send({
       message: "El nombre no puede estar vacio",
@@ -14,11 +14,11 @@ exports.agregar = (req, res) => {
     nombre: req.body.nombre,
     descripcion: req.body.descripcion || "",
     habilitado: req.body.habilitado || false,
-    imagen: req.body.imagen || "imagen.jpg",
+    imagen: req.body.imagen,
   };
   Producto.create(producto)
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -28,13 +28,13 @@ exports.agregar = (req, res) => {
 };
 
 // Todos los Productos de la db
-exports.buscarTodos = (req, res) => {
+exports.getAll = (req, res) => {
   const nombre = req.query.nombre;
   let condition = nombre ? { nombre: { [Op.like]: `%${nombre}%` } } : null;
 
   Producto.findAll({ where: condition })
     .then(data => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -44,12 +44,23 @@ exports.buscarTodos = (req, res) => {
 };
 
 // Encontrar un solo Producto a partir del id
-exports.buscarUnoPorId = (req, res) => {
+exports.getAllById = (req, res) => {
   const id = req.params.id;
+  console.log(id);
+  if (!id) {
+    res.status(500).send({
+      message: "Error de id",
+    });
+  }
 
   Producto.findByPk(id)
     .then(data => {
-      res.send(data);
+      if (!data) {
+        res.status(500).send({
+          message: "Ocurrio un error al obtener el Producto. Quizas no existe",
+        });
+      }
+      res.status(200).send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -59,7 +70,7 @@ exports.buscarUnoPorId = (req, res) => {
 };
 
 // Editar un Product por el id en el cuerpo de la request
-exports.actualizar = (req, res) => {
+exports.updateOne = (req, res) => {
   const id = req.params.id;
 
   Producto.update(req.body, {
@@ -67,12 +78,12 @@ exports.actualizar = (req, res) => {
   })
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(200).send({
           message: "Se edito el Producto satisfactoriamente.",
         });
       } else {
-        res.send({
-          message: `No se puede editar el Producto con id=${id}. Quizas el Producto no existe o req.body esta vacio.`,
+        res.status(500).send({
+          message: `No se puede editar el Producto con id=${id}. Quizas el Producto no existe o el cuerpo de la solicitud esta vacio.`,
         });
       }
     })
@@ -84,7 +95,7 @@ exports.actualizar = (req, res) => {
 };
 
 // Bora un Producto con el id especificado en el req
-exports.borrar = (req, res) => {
+exports.deleteOne = (req, res) => {
   const id = req.params.id;
 
   Producto.destroy({
@@ -92,34 +103,18 @@ exports.borrar = (req, res) => {
   })
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(200).send({
           message: "El producto fue eliminado satisfactoriamente!",
         });
       } else {
-        res.send({
-          message: `No se puede elimair el produrcot con id=${id}. Tal vez el producto no fue encontrado!`,
+        res.status(500).send({
+          message: `No se puede eliminar el producto con id=${id}. Tal vez el producto no fue encontrado.`,
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "No se pudo elimiar el tutorial con el id=" + id,
-      });
-    });
-};
-
-// Delete all Products from the database.
-// exports.borrarTodos = (req, res) => {};
-
-// Encuentra todos los Productos habilitados
-exports.encontrarHabilitados = (req, res) => {
-  Producto.findAll({ where: { habilitado: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Ocurrio un error al traer los productos.",
+        message: "No se pudo elimiar el producto con el id=" + id,
       });
     });
 };
